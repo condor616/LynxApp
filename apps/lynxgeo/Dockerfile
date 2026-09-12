@@ -38,6 +38,7 @@ ENV PORT=3010
 ENV HOSTNAME=0.0.0.0
 ENV NEXT_TELEMETRY_DISABLED=1
 COPY --from=builder /repo/apps/lynxgeo/.next ./.next
+COPY --from=builder /repo/apps/lynxgeo/public ./public
 COPY --from=builder /repo/apps/lynxgeo/node_modules ./node_modules
 COPY --from=builder /repo/apps/lynxgeo/package.json ./
 COPY --from=builder /repo/packages /packages
