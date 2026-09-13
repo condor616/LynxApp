@@ -1,3 +1,4 @@
+import fs from 'fs/promises';
 import path from 'path';
 
 export function resolveMonorepoRoot(cwd: string = process.cwd()): string {
@@ -13,6 +14,13 @@ export function getBackupDir(cwd: string = process.cwd()): string {
     return process.env.LYNX_BACKUP_DIR;
   }
   return path.join(resolveMonorepoRoot(cwd), 'data', 'backups');
+}
+
+/** Create the backup directory if missing (required before upload-restore writes). */
+export async function ensureBackupDir(cwd: string = process.cwd()): Promise<string> {
+  const backupDir = getBackupDir(cwd);
+  await fs.mkdir(backupDir, { recursive: true });
+  return backupDir;
 }
 
 export function sanitizeBackupFilename(name: string): string {

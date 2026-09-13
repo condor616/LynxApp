@@ -9,7 +9,7 @@ import { Pool } from 'pg';
 import { getLynxGeoDbName, getLynxScanDbName } from '@lynx/db';
 import { getDbCommand, parseDatabaseUrl } from './db-command';
 import { buildManifest, getBackupScope, parseManifest, type BackupManifestV1, type BackupProductId, type BackupScope } from './manifest';
-import { getBackupDir, sanitizeBackupFilename } from './paths';
+import { ensureBackupDir, sanitizeBackupFilename } from './paths';
 import {
   SYSTEM_SETTINGS_FILE,
   fromBackupSettingsFile,
@@ -189,7 +189,7 @@ export async function createBackup(
   options: BackupOptions = {},
 ): Promise<BackupResult> {
   const { cwd, rawInfo, runCommand } = getConnectionInfo(options);
-  const backupDir = getBackupDir(cwd);
+  const backupDir = await ensureBackupDir(cwd);
   const scanDbName = getLynxScanDbName(userId);
   const geoDbName = getLynxGeoDbName(userId);
   const timestamp = Date.now();
@@ -199,7 +199,6 @@ export async function createBackup(
   const zipPath = path.join(backupDir, finalFilename);
   const tempSqlDir = path.join(backupDir, `tmp-create-${timestamp}`);
 
-  await fs.mkdir(backupDir, { recursive: true });
   await fs.mkdir(tempSqlDir, { recursive: true });
 
   const scanSqlPath = path.join(tempSqlDir, SCAN_SQL);
@@ -321,7 +320,7 @@ export async function restoreBackup(
   options: BackupOptions = {},
 ): Promise<{ scope: BackupScope; restored: BackupProductId[]; restoredSystemSettings: boolean }> {
   const { cwd, rawInfo, runCommand } = getConnectionInfo(options);
-  const backupDir = getBackupDir(cwd);
+  const backupDir = await ensureBackupDir(cwd);
   const tempDir = path.join(backupDir, 'tmp-restore');
 
   console.log(`Starting restore for user ${userId} from ${zipFilePath}`);
@@ -370,8 +369,7 @@ export async function readBackupScope(zipFilePath: string): Promise<BackupScope>
 }
 
 export async function listBackups(username: string, options: BackupOptions = {}): Promise<BackupListEntry[]> {
-  const backupDir = getBackupDir(options.cwd);
-  await fs.mkdir(backupDir, { recursive: true });
+  const backupDir = await ensureBackupDir(options.cwd);
 
   const files = await fs.readdir(backupDir);
   const entries = await Promise.all(

@@ -7,7 +7,7 @@ export {
   type BackupProductId,
   type BackupScope,
 } from './manifest';
-export { getBackupDir, resolveMonorepoRoot, sanitizeBackupFilename, isBackupOwnedByUser } from './paths';
+export { getBackupDir, ensureBackupDir, resolveMonorepoRoot, sanitizeBackupFilename, isBackupOwnedByUser } from './paths';
 export {
   encryptSecret,
   decryptSecret,

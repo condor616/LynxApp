@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs/promises';
 import path from 'path';
 import { createBackup, restoreBackup, listBackups } from '@lynx/backup/backup';
-import { isBackupOwnedByUser, getBackupDir } from '@lynx/backup/paths';
+import { isBackupOwnedByUser, getBackupDir, ensureBackupDir } from '@lynx/backup/paths';
 import { requireApprovedUser, requireAdmin } from '@/lib/auth';
 import { getDb, db as centralDb } from '@/lib/db';
 import { users } from '@/lib/db/schema';
@@ -60,7 +60,8 @@ export async function POST(request: NextRequest) {
 
         if (action === 'upload-restore' && file) {
           const buffer = Buffer.from(await file.arrayBuffer());
-          const tempPath = path.join(getBackupDir(), `upload-${Date.now()}.zip`);
+          const backupDir = await ensureBackupDir();
+          const tempPath = path.join(backupDir, `upload-${Date.now()}.zip`);
           await fs.writeFile(tempPath, buffer);
 
           try {
