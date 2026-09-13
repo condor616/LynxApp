@@ -37,6 +37,12 @@ ENV NODE_ENV=production
 ENV PORT=3010
 ENV HOSTNAME=0.0.0.0
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV LYNX_BACKUP_DIR=/app/data/backups
+
+# postgresql-client required for backup/restore (pg_dump / psql)
+RUN apk add --no-cache postgresql-client \
+  && mkdir -p /app/data/backups
+
 COPY --from=builder /repo/apps/lynxgeo/.next ./.next
 COPY --from=builder /repo/apps/lynxgeo/public ./public
 COPY --from=builder /repo/apps/lynxgeo/node_modules ./node_modules

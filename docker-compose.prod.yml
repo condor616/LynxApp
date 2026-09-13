@@ -84,6 +84,9 @@ services:
       - SMTP_PASS=${SMTP_PASS:-}
       - SMTP_FROM=${SMTP_FROM:-}
       - MAIL_ADMIN=${MAIL_ADMIN:-}
+      - LYNX_BACKUP_DIR=/app/data/backups
+    volumes:
+      - backup_data:/app/data/backups
     depends_on:
       db:
         condition: service_healthy
@@ -157,6 +160,9 @@ services:
       - SMTP_PASS=${SMTP_PASS:-}
       - SMTP_FROM=${SMTP_FROM:-}
       - MAIL_ADMIN=${MAIL_ADMIN:-}
+      - LYNX_BACKUP_DIR=/app/data/backups
+    volumes:
+      - backup_data:/app/data/backups
     depends_on:
       db:
         condition: service_healthy
@@ -199,6 +205,7 @@ services:
 volumes:
   postgres_data:
   redis_data:
+  backup_data:
 
 networks:
   internal:

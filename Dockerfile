@@ -38,6 +38,9 @@ RUN adduser --system --uid 1001 nextjs
 # Install postgresql-client for database operations (backup/restore)
 RUN apk add --no-cache postgresql-client
 
+# Backup upload/restore directory (named volume mounts here; seed ownership for nextjs)
+RUN mkdir -p /app/data/backups && chown -R nextjs:nodejs /app/data
+
 # Set the correct permission for prerender cache
 RUN mkdir .next
 RUN chown nextjs:nodejs .next
@@ -55,5 +58,6 @@ EXPOSE 3000
 
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
+ENV LYNX_BACKUP_DIR=/app/data/backups
 
 CMD ["node", "server.js"]

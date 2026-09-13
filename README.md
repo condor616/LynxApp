@@ -393,6 +393,17 @@ Tune `BULLMQ_CONCURRENCY` / `BULLMQ_CONCURRENCY_GEO` in `.env`.
 
 **Application backups** (per-user zip via the UI/API) encrypt SMTP secrets with a key derived from `JWT_SECRET`. Keep that secret in a password manager; rotating it breaks restore of older encrypted settings.
 
+In production Compose, both `app` and `lynxgeo` share a named volume `backup_data` mounted at `/app/data/backups` (`LYNX_BACKUP_DIR`). Upload-restore and create-backup write there. After changing backup volume or image settings, recreate the app containers:
+
+```bash
+npm run prod:up
+# or rebuild only the web apps:
+docker compose -f docker-compose.prod.yml --env-file .env build app lynxgeo
+docker compose -f docker-compose.prod.yml --env-file .env up -d --no-deps app lynxgeo
+```
+
+To move a local backup into production: download/create the zip locally, then use **Upload & restore** in the production UI (same admin account / matching user id when restoring another user). The production `JWT_SECRET` must match the secret used when the archive encrypted SMTP settings if you need those credentials restored.
+
 **Infrastructure backups** (recommended for Proxmox):
 
 ```bash
@@ -400,7 +411,7 @@ Tune `BULLMQ_CONCURRENCY` / `BULLMQ_CONCURRENCY_GEO` in `.env`.
 docker compose -f docker-compose.prod.yml --env-file .env exec -T db \
   pg_dumpall -U lynx_scan > lynx-backup-$(date +%F).sql
 
-# Docker volumes (postgres_data, redis_data) can also be snapshotted at the VM/ZFS layer.
+# Docker volumes (postgres_data, redis_data, backup_data) can also be snapshotted at the VM/ZFS layer.
 ```
 
 Store dumps **off-box**. Test restore on a staging VM before you need it.
