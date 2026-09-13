@@ -12,7 +12,7 @@ try {
   console.log('🔍 Verifying Docker connection...');
   execSync('docker info', { stdio: 'ignore' });
 
-  console.log('🛑 Stopping Lynx GEO project containers (Dev & Prod)...');
+  console.log('🛑 Stopping LynxGEO project containers (Dev & Prod)...');
   try {
     execSync('docker compose down', { cwd: geoRoot, stdio: 'inherit' });
   } catch {

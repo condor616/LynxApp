@@ -55,10 +55,10 @@ export default function LoginPage() {
       <Card className="w-full max-w-[400px]">
         <CardHeader className="items-center text-center">
           <div className="mb-2 overflow-hidden rounded-lg border border-border">
-            <img src="/logo.png" alt="Lynx GEO" className="h-14 w-14 object-cover" />
+            <img src="/logo.png" alt="LynxGEO" className="h-14 w-14 object-cover" />
           </div>
           <CardTitle>
-            Lynx <span className="text-primary italic">GEO</span>
+            Lynx<span className="text-primary italic">GEO</span>
           </CardTitle>
           <CardDescription>
             Sign in with the same account used for LynxScan. Access is granted per product.

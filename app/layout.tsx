@@ -22,7 +22,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Lynx Scan',
+  title: 'LynxScan',
   description: 'High-performance digital integrity and link monitoring',
 };
 

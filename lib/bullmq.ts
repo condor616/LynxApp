@@ -11,7 +11,7 @@ export const connection = new IORedis(redisUrl, {
 export const QUEUE_NAME = 'scan-jobs';
 
 /**
- * Lynx GEO (AI Audit) queue on the same Redis. Separate name so Scan and GEO
+ * LynxGEO queue on the same Redis. Separate name so Scan and GEO
  * jobs never share a worker. Bull Board instantiates this by name only —
  * do not import apps/lynxgeo from the LynxScan worker.
  */

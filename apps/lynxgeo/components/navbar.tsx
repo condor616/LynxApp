@@ -98,10 +98,10 @@ export function Navbar({
           <div className="flex items-center gap-8 min-w-0">
             <Link href="/" className="flex items-center gap-2 group min-w-0">
               <div className="relative overflow-hidden rounded-lg border border-border transition-all duration-300 shrink-0">
-                <img src="/logo.png" alt="Lynx GEO" className="h-10 w-10 object-cover" />
+                <img src="/logo.png" alt="LynxGEO" className="h-10 w-10 object-cover" />
               </div>
               <span className="hidden min-[400px]:inline text-lg font-bold tracking-tight text-foreground truncate">
-                Lynx <span className="text-primary font-black italic">GEO</span>
+                Lynx<span className="text-primary font-black italic">GEO</span>
               </span>
             </Link>
 

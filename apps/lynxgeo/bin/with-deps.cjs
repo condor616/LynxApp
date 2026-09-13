@@ -25,7 +25,7 @@ function findTsx() {
 
 const bin = tool === 'next' ? findNext() : tool === 'tsx' ? findTsx() : null;
 if (!bin) {
-  console.error(`Lynx GEO could not find ${tool}. Run npm install at the repo root, or npm install inside apps/lynxgeo in Docker.`);
+  console.error(`LynxGEO could not find ${tool}. Run npm install at the repo root, or npm install inside apps/lynxgeo in Docker.`);
   process.exit(1);
 }
 

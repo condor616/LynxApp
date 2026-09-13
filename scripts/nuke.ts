@@ -13,7 +13,7 @@ try {
 try {
   execSync('docker compose -f apps/lynxgeo/docker/services/docker-compose.yml down -v', { stdio: 'inherit' });
 } catch (e) {
-  console.log('Note: Failed to tear down Lynx GEO docker stack. Continuing...');
+  console.log('Note: Failed to tear down LynxGEO docker stack. Continuing...');
 }
 
 console.log('2. Deleting .env file...');

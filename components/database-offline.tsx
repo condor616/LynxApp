@@ -11,7 +11,7 @@ export function DatabaseOffline() {
           <AlertTriangle className="h-16 w-16 text-destructive mb-4 relative z-10" />
           <h2 className="text-2xl font-bold text-foreground mb-2 relative z-10">Database Offline</h2>
           <p className="text-sm text-muted-foreground relative z-10">
-            Lynx Scan is connected to the app service, but the database/redis infrastructure is not reachable.
+            LynxScan is connected to the app service, but the database/redis infrastructure is not reachable.
           </p>
         </div>
         

@@ -61,7 +61,7 @@ function ProductAccess({
     },
     {
       key: 'lynxgeo',
-      label: 'Lynx GEO',
+      label: 'LynxGEO',
       checked: !!user.productAccess?.lynxgeo,
     },
   ] as const;
@@ -527,7 +527,7 @@ export function UsersTable({ initialUsers }: { initialUsers: any[] }) {
                     Associated Data:
                   </p>
                   <p className="text-sm">
-                    The central user record and this user&apos;s Lynx GEO database will be removed.
+                    The central user record and this user&apos;s LynxGEO database will be removed.
                     LynxScan data is unchanged unless you delete the user from LynxScan.
                   </p>
                 </div>

@@ -1,4 +1,4 @@
-# Lynx GEO worker. Build from repository root (same pattern as LynxScan):
+# LynxGEO worker. Build from repository root (same pattern as LynxScan):
 # docker build -f apps/lynxgeo/docker/services/worker.Dockerfile .
 FROM node:20-alpine
 RUN apk add --no-cache libc6-compat curl

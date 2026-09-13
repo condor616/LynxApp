@@ -19,7 +19,7 @@ You should receive an acknowledgement within a reasonable time. Please give us t
 
 ## Production hardening checklist
 
-When exposing Lynx Scan / Lynx GEO on the public internet:
+When exposing LynxApp (LynxScan / LynxGEO) on the public internet:
 
 - Use `docker-compose.prod.yml` (not the local `docker/services` stack)
 - Publish only app ports (`3001`, `3010`) to a reverse proxy; keep Postgres, Redis, FlareSolverr, Bull Board, and pgAdmin private

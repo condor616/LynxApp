@@ -51,7 +51,7 @@ test.describe('Authentication Flow', () => {
 
     // 7. Should be redirected to dashboard
     await expect(page).toHaveURL('/');
-    await expect(page.locator('h1')).toContainText('Lynx Scan');
+    await expect(page.locator('h1')).toContainText('LynxScan');
 
     // 8. Logout
     await page.click('button[title="Account Settings"]');

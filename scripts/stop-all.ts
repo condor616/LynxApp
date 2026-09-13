@@ -2,7 +2,7 @@ import { execSync } from 'child_process';
 
 const repoRoot = process.cwd();
 
-console.log('🛑 Stopping LynxScan and Lynx GEO...');
+console.log('🛑 Stopping LynxScan and LynxGEO...');
 try {
   execSync('npx tsx scripts/cleanup-all.ts', { cwd: repoRoot, stdio: 'inherit' });
 } catch {

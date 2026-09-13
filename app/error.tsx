@@ -22,7 +22,7 @@ export default function GlobalError({
           <AlertTriangle className="h-16 w-16 text-destructive mb-4" />
           <h2 className="text-2xl font-bold text-foreground mb-2">Service Unavailable</h2>
           <p className="text-sm text-muted-foreground">
-            Lynx Scan is unable to load this page. This usually happens when the backend database services are offline.
+            LynxScan is unable to load this page. This usually happens when the backend database services are offline.
           </p>
         </div>
         

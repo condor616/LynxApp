@@ -17,7 +17,7 @@ export default async function Home() {
               AI discoverability
             </div>
             <h1 className="text-4xl md:text-5xl font-black tracking-tight break-words">
-              Lynx <span className="text-primary italic">GEO</span>
+              Lynx<span className="text-primary italic">GEO</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed font-light break-words">
               Technical audit of how ready a site is for AI search and agents: crawl access, extractability,
@@ -26,8 +26,8 @@ export default async function Home() {
             {session && !canUse && (
               <Card>
                 <CardHeader>
-                  <CardTitle>No Lynx GEO access</CardTitle>
-                  <CardDescription>Ask an admin to enable Lynx GEO on the People page.</CardDescription>
+                  <CardTitle>No LynxGEO access</CardTitle>
+                  <CardDescription>Ask an admin to enable LynxGEO on the People page.</CardDescription>
                 </CardHeader>
               </Card>
             )}

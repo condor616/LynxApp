@@ -30,7 +30,7 @@ export function snapshotToHtml(name: string, startUrl: string, snapshot: FrozenS
     })
     .join('');
   return `<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><title>${escapeHtml(name)} — Lynx GEO</title></head>
+<html lang="en"><head><meta charset="utf-8"><title>${escapeHtml(name)} — LynxGEO</title></head>
 <body>
 <h1>${escapeHtml(name)}</h1>
 <p>${escapeHtml(startUrl)}</p>

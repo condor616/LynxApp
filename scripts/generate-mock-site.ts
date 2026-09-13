@@ -26,7 +26,7 @@ function generateHeader() {
 function generateFooter() {
     return `
     <footer id="main-footer">
-        <p>&copy; 2026 Lynx Scan Test Site</p>
+        <p>&copy; 2026 LynxScan Test Site</p>
         <ul>
             <li><a href="/privacy">Privacy Policy</a></li>
             <li><a href="/terms">Terms of Service</a></li>
@@ -42,7 +42,7 @@ function generatePage(title: string, content: string, country?: string) {
 <html lang="${country || 'en'}">
 <head>
     <meta charset="UTF-8">
-    <title>${title} | Lynx Scan Mock</title>
+    <title>${title} | LynxScan Mock</title>
     <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>

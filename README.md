@@ -1,15 +1,16 @@
-# Lynx Scan & Lynx GEO
+# LynxApp
 
-**Lynx Scan** is a high-performance link monitoring platform with deep recursive crawling, real-time progress, and report triage.
+**LynxApp** is the product suite that includes:
 
-**Lynx GEO** (AI Audit) is a sibling app in this repository that scores sites for AI discoverability (structured data, crawlability signals, content freshness, and related checks).
+- **LynxScan** — high-performance link monitoring with deep recursive crawling, real-time progress, and report triage
+- **LynxGEO** — AI discoverability audits (structured data, crawlability signals, content freshness, and related checks)
 
-Both apps share PostgreSQL and Redis, use separate BullMQ queues, and can share a login session across public hostnames when configured.
+Both products share PostgreSQL and Redis, use separate BullMQ queues, and can share a login session across public hostnames when configured.
 
-| App | Purpose | Local URL | Production example |
+| Product | Purpose | Local URL | Production example |
 | --- | --- | --- | --- |
-| Lynx Scan | Broken-link and crawl audits | http://localhost:3000 | https://lynxscan.condor616.com |
-| Lynx GEO | AI discoverability audits | http://localhost:3010 | https://lynxgeo.condor616.com |
+| LynxScan | Broken-link and crawl audits | http://localhost:3000 | https://lynxscan.condor616.com |
+| LynxGEO | AI discoverability audits | http://localhost:3010 | https://lynxgeo.condor616.com |
 
 This README is the canonical guide for local development, Proxmox / Docker production, reverse-proxy setup, security, operations, and contributing.
 
@@ -37,7 +38,7 @@ This README is the canonical guide for local development, Proxmox / Docker produ
 
 ## Features
 
-### Lynx Scan
+### LynxScan
 
 - Recursive crawling with depth, path scope, exclude rules, and target-URL modes
 - Real-time scan progress and link triage (broken, skipped, challenged, auth-gated)
@@ -46,10 +47,10 @@ This README is the canonical guide for local development, Proxmox / Docker produ
 - Per-user isolated Postgres databases for scan data
 - Templates, backups/restores, and admin user management
 
-### Lynx GEO
+### LynxGEO
 
 - AI-discoverability oriented audits with scored checks and actionable findings
-- Shared auth with Lynx Scan (same users table / JWT secret)
+- Shared auth with LynxScan (same users table / JWT secret)
 - Separate worker queue (`lynxgeo-jobs`) so Scan and GEO scale independently
 - Public methodology docs page (`/docs`)
 
@@ -59,18 +60,18 @@ This README is the canonical guide for local development, Proxmox / Docker produ
 
 ```text
 Browser
-  ├─ https://lynxscan…  → Lynx Scan (Next.js)
-  └─ https://lynxgeo…   → Lynx GEO (Next.js)
+  ├─ https://lynxscan…  → LynxScan (Next.js)
+  └─ https://lynxgeo…   → LynxGEO (Next.js)
            │
            ├─ Central Postgres (users, settings)
            ├─ Per-user DBs (lynx_scan_<id>, lynx_geo_<id>)
            ├─ Redis + BullMQ
-           │     ├─ scan-jobs      → Lynx Scan worker
-           │     └─ lynxgeo-jobs   → Lynx GEO worker
+           │     ├─ scan-jobs      → LynxScan worker
+           │     └─ lynxgeo-jobs   → LynxGEO worker
            └─ FlareSolverr (optional CF bypass)
 ```
 
-**Important:** local development runs Next.js on the host and Docker for Postgres/Redis/workers. Production (`docker-compose.prod.yml`) runs **both apps and both workers** in containers on one private Docker network, publishing only the two HTTP ports to the host (for Nginx Proxy Manager).
+**Important:** local development runs Next.js on the host and Docker for Postgres/Redis/workers. Production (`docker-compose.prod.yml`) runs **both LynxApp products and both workers** in containers on one private Docker network, publishing only the two HTTP ports to the host (for Nginx Proxy Manager).
 
 ---
 
@@ -78,17 +79,17 @@ Browser
 
 ```text
 .
-├── app/                      # Lynx Scan Next.js App Router
-├── apps/lynxgeo/              # Lynx GEO Next.js app + worker
+├── app/                      # LynxScan Next.js App Router
+├── apps/lynxgeo/              # LynxGEO Next.js app + worker
 ├── packages/
 │   ├── auth/                 # JWT + product access helpers
 │   ├── backup/               # Backup/restore utilities
-│   ├── crawler-core/         # Fetch, SSRF, discovery shared by both apps
+│   ├── crawler-core/         # Fetch, SSRF, discovery shared by both products
 │   └── db/                   # Per-user DB naming helpers
 ├── docker/services/          # Local-dev Compose (db/redis/worker/pgAdmin)
-├── docker-compose.yml        # Legacy Lynx Scan-only full Docker stack
-├── docker-compose.prod.yml   # Recommended production stack (Scan + GEO)
-├── worker/                   # Lynx Scan BullMQ worker
+├── docker-compose.yml        # Legacy LynxScan-only full Docker stack
+├── docker-compose.prod.yml   # Recommended production stack (LynxApp: Scan + GEO)
+├── worker/                   # LynxScan BullMQ worker
 ├── SECURITY.md
 └── docs/SECURITY_REVIEW.md
 ```
@@ -118,11 +119,11 @@ Browser
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/condor616/LinkChecker-AI-Studio-.git
-   cd LinkChecker-AI-Studio-
+   git clone https://git.condor616.com/condor616/LynxCheck.git lynx
+   cd lynx
    ```
 
-2. **Install dependencies** (root workspace + Lynx GEO app)
+2. **Install dependencies** (root workspace + LynxGEO app)
    ```bash
    npm install
    npm install --prefix apps/lynxgeo
@@ -149,7 +150,7 @@ All apps read the **repository-root** `.env`. Never commit real secrets.
 
 | Variable | Required | Purpose |
 | --- | --- | --- |
-| `APP_URL` | Yes (prod) | Canonical Lynx Scan public URL (emails, self links) |
+| `APP_URL` | Yes (prod) | Canonical LynxScan public URL (emails, self links) |
 | `NEXTAUTH_URL` | Recommended | Same as `APP_URL` in production |
 | `NEXT_PUBLIC_GEO_URL` | Yes | Browser link from Scan → GEO (**baked at image build time**) |
 | `NEXT_PUBLIC_LYNXSCAN_URL` | Yes | Browser link from GEO → Scan (**baked at image build time**) |
@@ -217,16 +218,16 @@ Next.js runs on the host; Docker provides Postgres, Redis, workers, FlareSolverr
 
 | Command | What starts |
 | --- | --- |
-| `npm run dev` | Lynx Scan (:3000) + Scan worker |
-| `npm run dev:lynxgeo` | Lynx GEO (:3010) + GEO worker |
+| `npm run dev` | LynxScan (:3000) + Scan worker |
+| `npm run dev:lynxgeo` | LynxGEO (:3010) + GEO worker |
 | `npm run dev:all` | Both apps + both workers |
 
 ### Local production-mode (host Next.js)
 
 | Command | What starts |
 | --- | --- |
-| `npm run build && npm run start` | Lynx Scan only |
-| `npm run build:lynxgeo && npm run start:lynxgeo` | Lynx GEO only |
+| `npm run build && npm run start` | LynxScan only |
+| `npm run build:lynxgeo && npm run start:lynxgeo` | LynxGEO only |
 | `npm run build:all && npm run start:all` | Both apps + Docker workers |
 
 ### Stop / cleanup
@@ -241,7 +242,7 @@ Next.js runs on the host; Docker provides Postgres, Redis, workers, FlareSolverr
 
 Worker images bake source at build time (no live bind-mount).
 
-| Stack | Lynx Scan | Lynx GEO |
+| Stack | LynxScan | LynxGEO |
 | --- | --- | --- |
 | Local dev | `npm run rebuild-worker:dev` | `npm run rebuild-worker:lynxgeo:dev` |
 | Legacy root compose | `npm run rebuild-worker` | `npm run rebuild-worker:lynxgeo` |
@@ -250,8 +251,8 @@ Worker images bake source at build time (no live bind-mount).
 
 | Service | Local `docker/services` | Legacy `docker-compose.yml` | Production `docker-compose.prod.yml` |
 | --- | --- | --- | --- |
-| Lynx Scan | 3000 (host Next) | 3001 | **3001** (published) |
-| Lynx GEO | 3010 (host Next) | — | **3010** (published) |
+| LynxScan | 3000 (host Next) | 3001 | **3001** (published) |
+| LynxGEO | 3010 (host Next) | — | **3010** (published) |
 | PostgreSQL | 5432 | 5433 | **not published** |
 | Redis | 6379 | 6380 | **not published** |
 | FlareSolverr | 8191 | 8191 | **not published** |
@@ -365,7 +366,7 @@ If you change `NEXT_PUBLIC_*` URLs, you **must** rebuild app images.
 
 ### 11. Legacy Compose notes
 
-- Root `docker-compose.yml` is a Lynx Scan-oriented stack that still publishes Postgres/Redis/pgAdmin — **prefer `docker-compose.prod.yml` for public deployments**.
+- Root `docker-compose.yml` is a LynxScan-oriented stack that still publishes Postgres/Redis/pgAdmin — **prefer `docker-compose.prod.yml` for public deployments**.
 - `apps/lynxgeo/docker-compose.yml` expects the local-dev Docker network and is not the production path.
 
 ---
@@ -458,9 +459,9 @@ See [`SECURITY.md`](SECURITY.md) for reporting vulnerabilities and [`docs/SECURI
 ## Testing
 
 ```bash
-npm run test          # Lynx Scan unit/integration (Vitest)
-npm run test:lynxgeo  # Lynx GEO unit tests
-npm run test:e2e      # Playwright E2E (Lynx Scan)
+npm run test          # LynxScan unit/integration (Vitest)
+npm run test:lynxgeo  # LynxGEO unit tests
+npm run test:e2e      # Playwright E2E (LynxScan)
 npm run lint          # ESLint
 ```
 

@@ -1,6 +1,8 @@
-# 🔗 Lynx Scan
+# 🔗 LynxApp — LynxScan images
 
-**Lynx Scan** is a high-performance, professional-grade digital integrity and link monitoring platform built for reliability and speed. Designed for deep recursive crawling and real-time monitoring, it provides enterprise-grade link auditing in a sleek, modern package.
+**LynxApp** includes **LynxScan** (link monitoring) and **LynxGEO** (AI discoverability audits).
+
+These Docker Hub images ship **LynxScan**: deep recursive crawling, real-time monitoring, and enterprise-grade link auditing.
 
 ## 🚀 Key Features
 
@@ -24,7 +26,7 @@
 
 ## 📦 Quick Start (Docker Compose)
 
-The easiest way to run Lynx Scan is using the official images with Docker Compose.
+The easiest way to run LynxScan is using the official images with Docker Compose.
 
 ### 1. Create a `docker-compose.yml`
 Save the following configuration to a file on your server:

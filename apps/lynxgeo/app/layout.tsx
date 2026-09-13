@@ -9,7 +9,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {
-  title: 'Lynx GEO',
+  title: 'LynxGEO',
   description: 'AI discoverability and agent-readiness audits',
   icons: {
     icon: [{ url: '/logo.png', type: 'image/png' }],

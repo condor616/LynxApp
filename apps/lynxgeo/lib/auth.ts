@@ -63,7 +63,7 @@ export async function requireGeoUser() {
     throw new Error('Forbidden: Your account is pending approval.');
   }
   if (!hasProductAccess(session.productAccess, 'lynxgeo')) {
-    throw new Error('Forbidden: You do not have access to Lynx GEO.');
+    throw new Error('Forbidden: You do not have access to LynxGEO.');
   }
   await provisionGeoDb(session.id);
   return session;

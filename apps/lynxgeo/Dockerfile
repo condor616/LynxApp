@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-# Lynx GEO app image. Compose context is apps/lynxgeo; packages/ is an extra context.
+# LynxGEO app image. Compose context is apps/lynxgeo; packages/ is an extra context.
 FROM node:20-alpine AS builder
 RUN apk add --no-cache libc6-compat
 WORKDIR /repo

@@ -61,7 +61,7 @@ function ProductAccess({
     },
     {
       key: 'lynxgeo',
-      label: 'Lynx GEO',
+      label: 'LynxGEO',
       checked: !!user.productAccess?.lynxgeo,
     },
   ] as const;

@@ -2,7 +2,7 @@
 
 ## Architecture Overview
 
-LynxScan is the root Next.js app in this repository (port 3000). Lynx GEO lives in `apps/lynxgeo` and is a sibling product. Both share PostgreSQL and Redis but use separate BullMQ queues.
+**LynxApp** is this monorepo. It includes **LynxScan** (root Next.js app, port 3000) and **LynxGEO** (`apps/lynxgeo`, port 3010). Both products share PostgreSQL and Redis but use separate BullMQ queues.
 
 ### Tech Stack
 - **Framework**: Next.js 15 (App Router)
@@ -23,12 +23,12 @@ Each approved LynxScan user gets an isolated Postgres database named `lynx_scan_
 
 ### Crawler Engine (BullMQ Worker)
 
-LynxScan and Lynx GEO share one Redis instance but **two BullMQ queue names**:
+LynxScan and LynxGEO share one Redis instance but **two BullMQ queue names**:
 
 | Queue | App | Enqueued by | Processed by |
 | --- | --- | --- | --- |
 | `scan-jobs` | LynxScan | LynxScan Next (`lib/bullmq.ts`) | LynxScan worker (`worker/index.ts`) |
-| `lynxgeo-jobs` | Lynx GEO (AI Audit) | GEO Next (`apps/lynxgeo/lib/geo/queue.ts`) | GEO worker (`apps/lynxgeo/worker/index.ts`) |
+| `lynxgeo-jobs` | LynxGEO | GEO Next (`apps/lynxgeo/lib/geo/queue.ts`) | GEO worker (`apps/lynxgeo/worker/index.ts`) |
 
 Do not merge these queues. GEO must never enqueue or process `scan-jobs`.
 
@@ -43,13 +43,13 @@ Bull **Waiting = 0** with **Active = 1** means a worker is processing; the queue
 - **Monitoring**: Bull Board lists both queues. Local worker: `http://localhost:3001/admin/queues`. Docker `lynxscan-dev` stack maps that to `http://localhost:3002/admin/queues`.
 
 ### Production deployment
-Use root [`docker-compose.prod.yml`](docker-compose.prod.yml) for Proxmox / reverse-proxy installs (Lynx Scan + Lynx GEO + both workers). See the root README for Nginx Proxy Manager, firewall, and env URL guidance. Keep local `docker/services` stacks for development only.
+Use root [`docker-compose.prod.yml`](docker-compose.prod.yml) for Proxmox / reverse-proxy installs (LynxScan + LynxGEO + both workers). See the root README for Nginx Proxy Manager, firewall, and env URL guidance. Keep local `docker/services` stacks for development only.
 
 
 ### Authentication Flow
 - JWT stored in an HTTP-only cookie.
 - First registered user is `ADMIN`. Later users are `PENDING` until approved.
-- Middleware and `requireApprovedUser` protect Scan routes. Admins grant per-product access (LynxScan / Lynx GEO).
+- Middleware and `requireApprovedUser` protect Scan routes. Admins grant per-product access (LynxScan / LynxGEO).
 
 ### Bidirectional JSON Sync
 The "New Scan" page keeps a visual form and a JSON editor in sync on a single `config` object.

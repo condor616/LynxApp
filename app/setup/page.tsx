@@ -63,9 +63,9 @@ export default function SetupPage() {
         <div className="flex justify-center">
             <h1 className="text-2xl font-black tracking-tighter flex items-center gap-2">
                 <div className="relative overflow-hidden rounded-xl border border-white/10 shadow-emerald-500/10 shadow-lg h-10 w-10 flex items-center justify-center bg-background">
-                  <img src="/logo.png" alt="Lynx Scan" className="h-full w-full object-cover p-[2px]" />
+                  <img src="/logo.png" alt="LynxScan" className="h-full w-full object-cover p-[2px]" />
                 </div>
-                <span>Lynx <span className="text-primary">Scan</span></span>
+                <span>Lynx<span className="text-primary">Scan</span></span>
             </h1>
         </div>
 

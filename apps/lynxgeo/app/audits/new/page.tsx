@@ -871,7 +871,7 @@ export default function NewAuditPage() {
                 </h3>
               </div>
               <p className="text-sm text-muted-foreground">
-                Name this crawler config. It is stored in your Lynx GEO database and can be applied on the next audit.
+                Name this crawler config. It is stored in your LynxGEO database and can be applied on the next audit.
               </p>
               <div className="space-y-2">
                 <Label htmlFor="template-name">Template name</Label>

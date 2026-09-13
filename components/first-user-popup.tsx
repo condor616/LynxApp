@@ -46,7 +46,7 @@ export function FirstUserPopup() {
               <div className="space-y-2">
                 <h2 className="text-2xl font-black tracking-tight text-foreground">System Uninitialized</h2>
                 <p className="text-muted-foreground text-sm">
-                  Welcome to Lynx Scan! It looks like there are no users in the database yet. 
+                  Welcome to LynxScan! It looks like there are no users in the database yet. 
                   You must create an account to begin, and this first account will automatically be granted <span className="font-bold text-primary">Administrator</span> privileges.
                 </p>
               </div>

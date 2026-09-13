@@ -89,12 +89,12 @@ try {
   console.log('🚀 Starting shared db/redis/FlareSolverr and the LynxScan worker...');
   startLynxScanStack();
 
-  console.log('🚀 Starting the Lynx GEO Docker worker...');
+  console.log('🚀 Starting the LynxGEO Docker worker...');
   try {
     startGeoWorker();
   } catch (geoError: any) {
     console.warn('\n' + '!'.repeat(64));
-    console.warn('⚠️ Lynx GEO Docker worker did not start. LynxScan will still boot.');
+    console.warn('⚠️ LynxGEO Docker worker did not start. LynxScan will still boot.');
     console.warn(geoError?.message || geoError);
     console.warn('!'.repeat(64) + '\n');
   }

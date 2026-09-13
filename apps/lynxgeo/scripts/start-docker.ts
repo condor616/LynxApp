@@ -71,7 +71,7 @@ try {
     // ps may be unavailable in some environments
   }
 
-  console.log('🚀 Starting Lynx GEO Docker worker...');
+  console.log('🚀 Starting LynxGEO Docker worker...');
   const lynxscanNetwork = 'lynxscan-dev_default';
   const geoUp = () =>
     execSync(`docker compose --env-file "${envPath}" -f "${geoCompose}" up -d`, {

@@ -69,7 +69,7 @@ export default function TemplatesPage() {
           <p className="text-xs uppercase tracking-widest text-primary font-bold">Presets</p>
           <h1 className="text-2xl sm:text-3xl font-black tracking-tight mt-1">Audit templates</h1>
           <p className="text-muted-foreground mt-1">
-            Save crawler configs and reuse them on a new GEO audit. Templates live in your Lynx GEO database.
+            Save crawler configs and reuse them on a new GEO audit. Templates live in your LynxGEO database.
           </p>
         </div>
         <Button onClick={() => router.push('/audits/new')} className="shrink-0 w-full sm:w-auto">

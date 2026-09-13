@@ -165,7 +165,7 @@ export function CreateUserDialog({ onCreated }: { onCreated: (user: CreatedUser)
                     onChange={(e) => setLynxgeo(e.target.checked)}
                     disabled={role === 'ADMIN'}
                   />
-                  Lynx GEO
+                  LynxGEO
                 </label>
               </div>
               <label className="flex items-center gap-2 text-sm">

@@ -36,10 +36,10 @@ if (prod) {
     PORT: process.env.PORT || '3000',
     HOSTNAME: process.env.HOSTNAME || 'localhost',
   });
-  start('Lynx GEO', 'npm', ['--prefix', 'apps/lynxgeo', 'run', 'start:app']);
+  start('LynxGEO', 'npm', ['--prefix', 'apps/lynxgeo', 'run', 'start:app']);
 } else {
   start('LynxScan', 'npx', ['next', 'dev']);
-  start('Lynx GEO', 'npm', ['--prefix', 'apps/lynxgeo', 'run', 'dev:app']);
+  start('LynxGEO', 'npm', ['--prefix', 'apps/lynxgeo', 'run', 'dev:app']);
 }
 
 function killTree(pid: number) {
@@ -62,7 +62,7 @@ function killTree(pid: number) {
 function shutdown() {
   if (shuttingDown) return;
   shuttingDown = true;
-  console.log('\n🛑 Stopping LynxScan and Lynx GEO...');
+  console.log('\n🛑 Stopping LynxScan and LynxGEO...');
   for (const child of children) {
     if (child.pid) killTree(child.pid);
   }

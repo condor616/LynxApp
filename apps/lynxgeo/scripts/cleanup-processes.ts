@@ -88,7 +88,7 @@ function killHostGeoWorkers(protectedPids: Set<string>) {
 }
 
 function cleanup() {
-  console.log(`🧹 Cleaning up existing Lynx GEO processes in ${geoRoot}...`);
+  console.log(`🧹 Cleaning up existing LynxGEO processes in ${geoRoot}...`);
   const protectedPids = ancestorPids(currentPid);
   killHostGeoWorkers(protectedPids);
 

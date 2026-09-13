@@ -59,7 +59,7 @@ export default async function Dashboard() {
             </div>
             
             <h1 className="text-5xl md:text-7xl font-black tracking-tighter leading-tight">
-              <span className="block text-foreground">Lynx <span className="text-primary font-black italic">Scan</span></span>
+              <span className="block text-foreground">Lynx<span className="text-primary font-black italic">Scan</span></span>
               <span className="block text-muted-foreground text-4xl md:text-5xl font-bold">
                 Professional Link Integrity.
               </span>
@@ -104,7 +104,7 @@ export default async function Dashboard() {
             <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
               <div className="max-w-2xl space-y-4">
                 <h2 className="text-3xl md:text-5xl font-black tracking-tight">
-                  Lynx <span className="italic" style={{ color: 'hsl(172 45% 52%)' }}>GEO</span>
+                  Lynx<span className="italic" style={{ color: 'hsl(172 45% 52%)' }}>GEO</span>
                 </h2>
                 <p className="text-base md:text-lg leading-relaxed" style={{ color: 'hsl(172 12% 78%)' }}>
                   Technical AI-discoverability and agent-readiness audits — crawl access, extractability,
@@ -117,7 +117,7 @@ export default async function Dashboard() {
                 className="shrink-0 px-10 h-14 text-lg font-bold rounded-lg text-white hover:opacity-90"
                 style={{ background: 'hsl(172 55% 28%)' }}
               >
-                <a href={geoAppUrl} target="_blank" rel="noopener noreferrer">Open Lynx GEO</a>
+                <a href={geoAppUrl} target="_blank" rel="noopener noreferrer">Open LynxGEO</a>
               </Button>
             </div>
           </div>

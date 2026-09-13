@@ -17,8 +17,8 @@ import {
 import { loadVocabIndex } from '@/lib/geo/schemaorg/vocab';
 
 export const metadata = {
-  title: 'Docs · Lynx GEO',
-  description: 'How Lynx GEO scores AI discoverability (geo-1.4 GEO weights + Cloudflare-aligned Agent Readiness).',
+  title: 'Docs · LynxGEO',
+  description: 'How LynxGEO scores AI discoverability (geo-1.4 GEO weights + Cloudflare-aligned Agent Readiness).',
 };
 
 const CATEGORY_ORDER: FindingCategory[] = [
@@ -74,7 +74,7 @@ export default function DocsPage() {
         <p className="text-xs uppercase tracking-widest text-primary font-bold">{SCORE_MODEL_VERSION}</p>
         <h1 className="text-3xl sm:text-4xl font-black tracking-tight">Docs</h1>
         <p className="text-base sm:text-lg text-muted-foreground max-w-3xl">
-          Lynx GEO is a technical audit of AI discoverability and agent-readiness. The overall score is not a Google
+          LynxGEO is a technical audit of AI discoverability and agent-readiness. The overall score is not a Google
           ranking prediction, and publishing <code>llms.txt</code> does not make Google Search (or anyone else) rank
           you higher. Page crawl stays under the start URL path (same host, different prefix is out of scope).
           Site probes still check origin-root files such as <code>robots.txt</code> and <code>llms.txt</code>.

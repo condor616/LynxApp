@@ -91,7 +91,7 @@ export function Navbar({ user }: NavbarProps) {
               />
             </div>
             <span className="text-base sm:text-lg font-bold tracking-tight text-foreground whitespace-nowrap">
-              Lynx <span className="text-primary font-black">Scan</span>
+              Lynx<span className="text-primary font-black">Scan</span>
             </span>
           </Link>
 

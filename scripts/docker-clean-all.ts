@@ -4,7 +4,7 @@ import path from 'path';
 const repoRoot = process.cwd();
 const geoRoot = path.join(repoRoot, 'apps/lynxgeo');
 
-console.log('🧹 Stopping Docker stacks for LynxScan and Lynx GEO (volumes kept)...');
+console.log('🧹 Stopping Docker stacks for LynxScan and LynxGEO (volumes kept)...');
 
 const commands = [
   { cwd: repoRoot, cmd: 'docker compose down' },
